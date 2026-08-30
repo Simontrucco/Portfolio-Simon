@@ -5,12 +5,21 @@
  * Editá este archivo para cambiar textos, imágenes y videos del portfolio.
  * - Las imágenes se importan desde src/assets (agregá las tuyas ahí).
  * - videoSource puede ser null si el proyecto todavía no tiene demo en video.
+ *   Ej: videoSource: "/videos/mi-demo.mp4"  (archivo en public/videos/)
  * ============================================================================
  */
 
 import projGame from "@/assets/proj-game.jpg";
+import projGame2 from "@/assets/proj-game-2.jpg";
+import projGame3 from "@/assets/proj-game-3.jpg";
+import projGame4 from "@/assets/proj-game-4.jpg";
 import projWeb from "@/assets/proj-web.jpg";
+import projWeb2 from "@/assets/proj-web-2.jpg";
+import projWeb3 from "@/assets/proj-web-3.jpg";
+import projWeb4 from "@/assets/proj-web-4.jpg";
 import projBrand from "@/assets/proj-brand.jpg";
+import projOther2 from "@/assets/proj-other-2.jpg";
+import projOther3 from "@/assets/proj-other-3.jpg";
 import detailProcess from "@/assets/detail-process.jpg";
 import detailSystem from "@/assets/detail-system.jpg";
 
@@ -21,7 +30,7 @@ export type Category = (typeof CATEGORIES)[number];
 export type Project = {
   id: string;
   category: Category;
-  coverImage: string; // Portada (se muestra en B&N y a color al hover)
+  coverImage: string;
   title: string;
   type: string; // Ej: "Games Design", "Web Development"
   description: string; // Descripción corta en la lista
@@ -36,7 +45,43 @@ export type Project = {
   processPhotos: string[]; // Grilla de 3 fotos
 };
 
+/** Bloques reutilizables para no repetir texto en cada proyecto */
+const OBJETIVOS_BASE = [
+  {
+    title: "Visual Representation",
+    text: "Un lenguaje visual coherente y reconocible en todos los puntos de contacto del proyecto.",
+  },
+  {
+    title: "Market Appeal",
+    text: "Decisiones de diseño orientadas a destacar frente a la competencia y captar atención rápido.",
+  },
+  {
+    title: "Brand Alignment",
+    text: "Tipografía, color y tono alineados a la identidad de la marca en cada pieza.",
+  },
+];
+
+const PROCESO_BASE = [
+  {
+    title: "Research & Inspiration",
+    text: "Análisis de referencias, competencia y necesidades reales de los usuarios del proyecto.",
+  },
+  {
+    title: "Concept Development",
+    text: "Bocetos, wireframes y definición del sistema de diseño: grilla, tipografía y componentes.",
+  },
+  {
+    title: "Design & Iteration",
+    text: "Prototipos validados con usuarios reales y ajustes de jerarquía, contraste y microcopy.",
+  },
+  {
+    title: "Finalization",
+    text: "Entrega final: assets optimizados, desarrollo responsive y medición de resultados.",
+  },
+];
+
 export const PROJECTS: Project[] = [
+  // ------------------------------ JUEGOS (4) ------------------------------
   {
     id: "neon-runner",
     category: "Juegos",
@@ -50,41 +95,67 @@ export const PROJECTS: Project[] = [
       "Neon Runner es un arcade de scroll lateral pensado para sesiones cortas en mobile. Trabajé la dirección de arte, el diseño de niveles y toda la interfaz in-game, buscando legibilidad absoluta a alta velocidad sin perder personalidad visual.",
     photo1: projGame,
     photo2: detailSystem,
-    videoSource: null, // Colocá acá la ruta del video: "/videos/neon-runner.mp4"
-    designObjectives: [
-      {
-        title: "Visual Representation",
-        text: "La identidad visual debía transmitir velocidad y energía nocturna, con una paleta neón consistente en todos los assets.",
-      },
-      {
-        title: "Market Appeal",
-        text: "El juego tenía que competir en un género saturado, destacándose desde la primera captura en la tienda de apps.",
-      },
-      {
-        title: "Brand Alignment",
-        text: "Cada pieza publicitaria y el propio juego comparten el mismo sistema tipográfico y cromático.",
-      },
-    ],
-    designProcess: [
-      {
-        title: "Research & Inspiration",
-        text: "Analicé referencias del arcade retro y de la estética synthwave para definir un lenguaje visual reconocible.",
-      },
-      {
-        title: "Concept Development",
-        text: "Bocetos de niveles, pruebas de contraste y definición del HUD mínimo necesario para jugar sin distracciones.",
-      },
-      {
-        title: "Design & Iteration",
-        text: "Testeos con jugadores reales para ajustar dificultad, feedback visual y tiempos de respuesta de la interfaz.",
-      },
-      {
-        title: "Finalization",
-        text: "Exportación de assets optimizados, sistema de partículas final y piezas de marketing para lanzamiento.",
-      },
-    ],
+    videoSource: null, // Ej: "/videos/neon-runner.mp4"
+    designObjectives: OBJETIVOS_BASE,
+    designProcess: PROCESO_BASE,
     processPhotos: [detailProcess, detailSystem, projGame],
   },
+  {
+    id: "forest-jump",
+    category: "Juegos",
+    coverImage: projGame2,
+    title: "Forest Jump",
+    type: "Games Design / Pixel Art",
+    description:
+      "Plataformero 2D con arte pixel y paleta vibrante: diseño de personajes, niveles progresivos y HUD amigable.",
+    pageTitle: "Forest Jump",
+    pageDescription:
+      "Un plataformero de exploración pensado para público familiar. Diseñé los personajes, la curva de dificultad de los 30 niveles y un HUD mínimo que deja el protagonismo al escenario ilustrado.",
+    photo1: projGame2,
+    photo2: detailProcess,
+    videoSource: null,
+    designObjectives: OBJETIVOS_BASE,
+    designProcess: PROCESO_BASE,
+    processPhotos: [projGame2, detailProcess, detailSystem],
+  },
+  {
+    id: "block-logic",
+    category: "Juegos",
+    coverImage: projGame3,
+    title: "Block Logic",
+    type: "Puzzle / UX Mobile",
+    description:
+      "Puzzle isométrico para tablet: sistema de niveles, onboarding sin texto y una UI pastel accesible.",
+    pageTitle: "Block Logic",
+    pageDescription:
+      "Puzzle isométrico donde el desafío es la claridad. Definí un onboarding sin texto, jerarquía de colores accesible y un sistema de progresión que mantiene la retención sin frustrar al jugador.",
+    photo1: projGame3,
+    photo2: detailSystem,
+    videoSource: null,
+    designObjectives: OBJETIVOS_BASE,
+    designProcess: PROCESO_BASE,
+    processPhotos: [projGame3, detailSystem, detailProcess],
+  },
+  {
+    id: "turbo-circuit",
+    category: "Juegos",
+    coverImage: projGame4,
+    title: "Turbo Circuit",
+    type: "Arcade Racing / Key Art",
+    description:
+      "Racing arcade retro: key art, identidad del juego y piezas promocionales para tiendas de apps.",
+    pageTitle: "Turbo Circuit",
+    pageDescription:
+      "Racing arcade inspirado en los 80. Desarrollé la key art, el sistema de identidad del juego y todas las piezas promocionales, priorizando impacto visual en la primera captura de la store.",
+    photo1: projGame4,
+    photo2: detailProcess,
+    videoSource: null,
+    designObjectives: OBJETIVOS_BASE,
+    designProcess: PROCESO_BASE,
+    processPhotos: [projGame4, detailProcess, detailSystem],
+  },
+
+  // ------------------- SITIOS WEBS / MARKETING (4) -------------------
   {
     id: "ecommerce-atelier",
     category: "Sitios webs / Marketing",
@@ -95,44 +166,70 @@ export const PROJECTS: Project[] = [
       "Tienda online completa con enfoque en conversión: arquitectura de información, diseño UX/UI y desarrollo Frontend responsive.",
     pageTitle: "Atelier E-commerce",
     pageDescription:
-      "Un e-commerce de accesorios premium construido desde cero. Definí la arquitectura de información, diseñé el sistema de componentes y desarrollé el Frontend, integrando la estrategia de marketing digital en cada punto de contacto del embudo de compra.",
+      "Un e-commerce de accesorios premium construido desde cero. Definí la arquitectura de información, diseñé el sistema de componentes y desarrollé el Frontend, integrando la estrategia de marketing digital en cada punto del embudo de compra.",
     photo1: projWeb,
     photo2: detailSystem,
     videoSource: null, // Ej: "/videos/atelier-demo.mp4"
-    designObjectives: [
-      {
-        title: "Visual Representation",
-        text: "Un lenguaje visual sobrio que deje el protagonismo al producto y sostenga la percepción de marca premium.",
-      },
-      {
-        title: "Market Appeal",
-        text: "Fichas de producto claras, prueba social y checkout corto para reducir el abandono del carrito.",
-      },
-      {
-        title: "Brand Alignment",
-        text: "El sitio, el email marketing y las piezas de redes comparten la misma identidad y tono de comunicación.",
-      },
-    ],
-    designProcess: [
-      {
-        title: "Research & Inspiration",
-        text: "Auditoría de competidores y entrevistas con clientas para mapear objeciones reales de compra.",
-      },
-      {
-        title: "Concept Development",
-        text: "Wireframes de las vistas clave y definición del sistema de diseño: tipografía, grilla y componentes.",
-      },
-      {
-        title: "Design & Iteration",
-        text: "Prototipos navegables validados con usuarios; ajustes de jerarquía y microcopy en el checkout.",
-      },
-      {
-        title: "Finalization",
-        text: "Desarrollo Frontend responsive, optimización de performance y seguimiento de eventos de conversión.",
-      },
-    ],
+    designObjectives: OBJETIVOS_BASE,
+    designProcess: PROCESO_BASE,
     processPhotos: [detailProcess, projWeb, detailSystem],
   },
+  {
+    id: "resto-landing",
+    category: "Sitios webs / Marketing",
+    coverImage: projWeb2,
+    title: "Landing Gastronómica",
+    type: "Web Design & Development",
+    description:
+      "Landing de restaurante con reservas online, menú dinámico y optimización SEO local.",
+    pageTitle: "Landing Gastronómica",
+    pageDescription:
+      "Sitio de un restaurante con foco en reservas. Diseñé y desarrollé la landing, integré el sistema de reservas y trabajé el SEO local para captar búsquedas de la zona.",
+    photo1: projWeb2,
+    photo2: detailSystem,
+    videoSource: null,
+    designObjectives: OBJETIVOS_BASE,
+    designProcess: PROCESO_BASE,
+    processPhotos: [projWeb2, detailProcess, detailSystem],
+  },
+  {
+    id: "saas-dashboard",
+    category: "Sitios webs / Marketing",
+    coverImage: projWeb3,
+    title: "Dashboard SaaS",
+    type: "Product & UX/UI Design",
+    description:
+      "Panel de analytics en modo oscuro: visualización de datos, componentes reutilizables y flujos de onboarding.",
+    pageTitle: "Dashboard SaaS",
+    pageDescription:
+      "Panel de analítica para un producto SaaS. Definí la arquitectura de la información, la librería de componentes en modo oscuro y los flujos de onboarding que reducen el tiempo hasta el primer valor.",
+    photo1: projWeb3,
+    photo2: detailSystem,
+    videoSource: null,
+    designObjectives: OBJETIVOS_BASE,
+    designProcess: PROCESO_BASE,
+    processPhotos: [projWeb3, detailSystem, detailProcess],
+  },
+  {
+    id: "campana-social",
+    category: "Sitios webs / Marketing",
+    coverImage: projWeb4,
+    title: "Campaña Social Ads",
+    type: "Digital Marketing",
+    description:
+      "Campaña multiplataforma: piezas publicitarias, copies y testeo A/B orientado a conversión.",
+    pageTitle: "Campaña Social Ads",
+    pageDescription:
+      "Estrategia y producción creativa de una campaña de social ads: sistema de plantillas, variantes para testeo A/B y seguimiento de métricas para escalar los anuncios ganadores.",
+    photo1: projWeb4,
+    photo2: detailProcess,
+    videoSource: null,
+    designObjectives: OBJETIVOS_BASE,
+    designProcess: PROCESO_BASE,
+    processPhotos: [projWeb4, detailProcess, detailSystem],
+  },
+
+  // ------------------------------ OTROS (3) ------------------------------
   {
     id: "identidad-marca",
     category: "Otros",
@@ -147,39 +244,45 @@ export const PROJECTS: Project[] = [
     photo1: projBrand,
     photo2: detailProcess,
     videoSource: null,
-    designObjectives: [
-      {
-        title: "Visual Representation",
-        text: "Una marca reconocible en tamaños mínimos y coherente en soportes impresos y digitales.",
-      },
-      {
-        title: "Market Appeal",
-        text: "Posicionamiento diferencial frente a competidores con identidades genéricas.",
-      },
-      {
-        title: "Brand Alignment",
-        text: "Reglas claras de uso para que el equipo mantenga la consistencia sin diseñador presente.",
-      },
-    ],
-    designProcess: [
-      {
-        title: "Research & Inspiration",
-        text: "Workshop de marca, definición de atributos y moodboards de dirección visual.",
-      },
-      {
-        title: "Concept Development",
-        text: "Exploración tipográfica y construcción geométrica del logotipo en tres rutas distintas.",
-      },
-      {
-        title: "Design & Iteration",
-        text: "Refinamiento de la ruta elegida, pruebas de contraste y versiones monocromáticas.",
-      },
-      {
-        title: "Finalization",
-        text: "Entrega del manual de marca, archivos vectoriales y plantillas editables.",
-      },
-    ],
+    designObjectives: OBJETIVOS_BASE,
+    designProcess: PROCESO_BASE,
     processPhotos: [projBrand, detailProcess, detailSystem],
+  },
+  {
+    id: "editorial-print",
+    category: "Otros",
+    coverImage: projOther2,
+    title: "Editorial & Print",
+    type: "Editorial Design",
+    description:
+      "Diseño editorial de un catálogo fotográfico: grilla, tipografía y preparación de archivos para imprenta.",
+    pageTitle: "Editorial & Print",
+    pageDescription:
+      "Catálogo impreso para un estudio de fotografía. Definí la grilla editorial, la jerarquía tipográfica y el pliego completo, incluyendo la preparación técnica de archivos para imprenta.",
+    photo1: projOther2,
+    photo2: detailProcess,
+    videoSource: null,
+    designObjectives: OBJETIVOS_BASE,
+    designProcess: PROCESO_BASE,
+    processPhotos: [projOther2, detailProcess, detailSystem],
+  },
+  {
+    id: "packaging-line",
+    category: "Otros",
+    coverImage: projOther3,
+    title: "Línea de Packaging",
+    type: "Packaging Design",
+    description:
+      "Sistema de packaging para una línea de productos: etiquetas, jerarquía en góndola y mockups finales.",
+    pageTitle: "Línea de Packaging",
+    pageDescription:
+      "Sistema de packaging escalable para una familia de productos. Trabajé el código cromático por variedad, la jerarquía de lectura en góndola y los mockups de presentación para el cliente.",
+    photo1: projOther3,
+    photo2: detailSystem,
+    videoSource: null,
+    designObjectives: OBJETIVOS_BASE,
+    designProcess: PROCESO_BASE,
+    processPhotos: [projOther3, detailSystem, detailProcess],
   },
 ];
 
