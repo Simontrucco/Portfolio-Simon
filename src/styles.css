@@ -132,6 +132,11 @@
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
+@theme {
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+}
+
 @layer base {
   * {
     border-color: var(--color-border);
@@ -140,5 +145,55 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
   }
 }
+
+/* --- Marquee infinito (carrusel de habilidades) --- */
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility animate-marquee {
+  animation: marquee-scroll 28s linear infinite;
+}
+
+/* --- Imágenes en blanco y negro que pasan a color al hover --- */
+@utility img-bw {
+  filter: grayscale(100%);
+  transition: filter 0.3s ease-out, transform 0.5s ease-out;
+
+  &:hover {
+    filter: grayscale(0%);
+  }
+}
+
+/* --- Aparición suave al cambiar de vista en la SPA --- */
+@keyframes view-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-view-in {
+  animation: view-fade-in 0.35s ease-out both;
+}
+
