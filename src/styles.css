@@ -182,6 +182,38 @@
   }
 }
 
+/* --- Zoom suave al hover para fotos a color --- */
+@utility img-zoom {
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+/* --- Reveal al hacer scroll: fade + deslizamiento hacia arriba --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s ease-out,
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* --- Aparición suave al cambiar de vista en la SPA --- */
 @keyframes view-fade-in {
   from {
